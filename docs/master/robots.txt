@@ -1,3 +1,0 @@
-User-agent: *
-Disallow:
-Sitemap: https://ping.github.io/travis-ghpages-test/docs/master/sitemap.xml
