@@ -25,14 +25,16 @@ SHA=`git rev-parse --verify HEAD`
 
 git clone $REPO $BUILD_DIR
 cd $BUILD_DIR
-git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
-
-# Clean out existing build
-cd "$BUILD_DIR"
-git rm -rf .
-mkdir docs
+git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH && cd "$BUILD_DIR" && git rm -rf .
 
 cd "$CWD"
+
+# Prep docs folders
+mkdir -p "$BUILD_DIR/docs"
+if [ -d "$BUILD_DIR/docs/$TRAVIS_BRANCH" ]; then
+    # remove last build
+    rm -rf "$BUILD_DIR/docs/$TRAVIS_BRANCH"
+fi
 
 # Grab latest phpDoc
 curl -sOL 'https://phpdoc.org/phpDocumentor.phar'
