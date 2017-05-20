@@ -45,7 +45,7 @@ if [[ "$DOC_GENERATOR" == 'phpdoc' ]]; then
 elif [[ "$DOC_GENERATOR" == 'apigen' ]]; then
     # --------- APIGEN ---------
     # Grab latest apigen
-    curl -sOL 'http://www.apigen.org/apigen.phar'
+    curl -sL -o 'apigen.phar' 'https://github.com/ApiGen/ApiGen/releases/download/v4.1.0/apigen-4.1.0.phar'
     php apigen.phar generate -q -s ./src -d $BUILD_DIR/docs/$TRAVIS_BRANCH
 fi
 
