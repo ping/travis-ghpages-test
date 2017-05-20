@@ -4,10 +4,11 @@
 
 set -e
 
+CWD=$(pwd)
 SOURCE_BRANCH="master"
 TARGET_BRANCH="gh-pages"
 
-BUILD_DIR="$HOME/.build"
+BUILD_DIR="$CWD/.build"
 
 # Pull requests and commits to other branches shouldn't try to deploy, and only deploy in the php5.6 job
 if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" -o "$TRAVIS_PHP_VERSION" != "5.6" ]; then
@@ -30,7 +31,7 @@ git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
 rm -rf $BUILD_DIR/docs/$TRAVIS_BRANCH || exit 0
 mkdir -p $BUILD_DIR/docs
 
-cd $HOME
+cd "$CWD"
 
 # Grab latest phpDoc
 curl -sOL 'https://phpdoc.org/phpDocumentor.phar'
@@ -63,7 +64,7 @@ ENCRYPTED_IV=${!ENCRYPTED_IV_VAR}
 
 eval `ssh-agent -s`
 # Use stdin/stdout instead of key writing to disk
-openssl aes-256-cbc -K $ENCRYPTED_KEY -iv $ENCRYPTED_IV -in $HOME/.github/deploy_key.enc -d | ssh-add -
+openssl aes-256-cbc -K $ENCRYPTED_KEY -iv $ENCRYPTED_IV -in "$CWD/.github/deploy_key.enc" -d | ssh-add -
 
 # Now that we're all set up, we can push.
 git push $SSH_REPO $TARGET_BRANCH
