@@ -40,6 +40,7 @@ curl -sOL 'https://phpdoc.org/phpDocumentor.phar'
 php phpDocumentor.phar -q -n --template="responsive" --title="A TEST" --defaultpackagename="test" -d ./src -t $BUILD_DIR/docs/$TRAVIS_BRANCH
 # Clear cache folders
 rm -rf $BUILD_DIR/docs/$TRAVIS_BRANCH/phpdoc-cache-*
+
 echo "... Generated docs."
 
 cd $BUILD_DIR
