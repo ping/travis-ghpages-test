@@ -10,12 +10,6 @@ TARGET_BRANCH="gh-pages"
 
 BUILD_DIR="$HOME/.build"
 
-# Pull requests and commits to other branches shouldn't try to deploy, and only deploy in the php5.6 job
-if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" -o "$TRAVIS_PHP_VERSION" != "5.6" ]; then
-    echo "Skipping gh-pages build."
-    exit 0
-fi
-
 echo "Publishing to Github Pages..."
 
 # Save some useful information
@@ -27,15 +21,15 @@ git clone --quiet $REPO $BUILD_DIR
 
 cd $BUILD_DIR
 
-(git checkout --quiet $TARGET_BRANCH && echo "Cloned existing $TARGET_BRANCH.") \
-|| (git checkout --quiet --orphan $TARGET_BRANCH && echo "Cloned new $TARGET_BRANCH." && cd "$BUILD_DIR" && git rm -qrf .)
+(git checkout --quiet $TARGET_BRANCH && echo "... Cloned existing $TARGET_BRANCH.") \
+|| (git checkout --quiet --orphan $TARGET_BRANCH && echo "... Cloned new $TARGET_BRANCH." && cd "$BUILD_DIR" && git rm -qrf .)
 
 cd "$CWD"
 
 # Prep docs folders
 mkdir -p "$BUILD_DIR/docs"
 if [ -d "$BUILD_DIR/docs/$TRAVIS_BRANCH" ]; then
-    # remove last build silently
+    # remove last build
     rm -rf "$BUILD_DIR/docs/$TRAVIS_BRANCH"
 fi
 
