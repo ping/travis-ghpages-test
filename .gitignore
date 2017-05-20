@@ -1,4 +1,2 @@
-
 deploy_key
-*.phar
-
+deploy_key.pub
