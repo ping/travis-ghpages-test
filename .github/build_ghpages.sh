@@ -23,17 +23,18 @@ REPO=`git config remote.origin.url`
 SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
 SHA=`git rev-parse --verify HEAD`
 
-git clone $REPO $BUILD_DIR
+git clone --quiet $REPO $BUILD_DIR
 cd $BUILD_DIR
-git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH && cd "$BUILD_DIR" && git rm -rf .
+git checkout --quiet $TARGET_BRANCH || git checkout --quiet --orphan $TARGET_BRANCH && cd "$BUILD_DIR" && git rm -rf .
 
 cd "$CWD"
 
 # Prep docs folders
 mkdir -p "$BUILD_DIR/docs"
 if [ -d "$BUILD_DIR/docs/$TRAVIS_BRANCH" ]; then
-    # remove last build
-    rm -rf "$BUILD_DIR/docs/$TRAVIS_BRANCH"
+    # remove last build silently
+    @rm -rf "$BUILD_DIR/docs/$TRAVIS_BRANCH"
+    ls -lr "$BUILD_DIR/docs/"
 fi
 
 # Grab latest phpDoc
@@ -47,7 +48,7 @@ cd $BUILD_DIR
 git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
 
-git add "docs/$TRAVIS_BRANCH"
+git add --quiet "docs/$TRAVIS_BRANCH"
 
 # If there are no changes to the compiled out (e.g. this is a README update) then just bail.
 if git diff --quiet --cached; then
@@ -57,7 +58,7 @@ fi
 
 # Commit the "changes", i.e. the new version.
 # The delta will show diffs between new and old versions.
-git commit -m "Deploy to GitHub Pages: ${SHA} (Travis Build: $TRAVIS_BUILD_NUMBER)"
+git commit --quiet -m "Deploy to GitHub Pages: ${SHA} (Travis Build: $TRAVIS_BUILD_NUMBER)"
 
 # Get the deploy key by using Travis's stored variables to decrypt deploy_key.enc
 ENCRYPTED_KEY_VAR="encrypted_${ENCRYPTION_LABEL}_key"
