@@ -28,10 +28,9 @@ cd $BUILD_DIR
 git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
 
 # Clean out existing build
-rm -rf $BUILD_DIR/docs/$TRAVIS_BRANCH || exit 0
-mkdir -p $BUILD_DIR/docs
-
 cd "$CWD"
+rm -rf $BUILD_DIR/**/* || exit 0
+mkdir -p $BUILD_DIR/docs
 
 # Grab latest phpDoc
 curl -sOL 'https://phpdoc.org/phpDocumentor.phar'
