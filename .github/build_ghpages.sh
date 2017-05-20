@@ -30,6 +30,10 @@ git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
 # Clean out existing build
 cd "$CWD"
 rm -rf $BUILD_DIR/* || exit 0
+
+echo "$BUILD_DIR"
+ls -l $BUILD_DIR
+
 mkdir -p $BUILD_DIR/docs
 
 # Grab latest phpDoc
