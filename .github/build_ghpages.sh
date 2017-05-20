@@ -47,10 +47,6 @@ cd $BUILD_DIR
 git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
 
-echo "Inside $BUILD_DIR"
-ls -l
-ls -l "docs/$TRAVIS_BRANCH"
-
 git add "docs/$TRAVIS_BRANCH"
 
 # If there are no changes to the compiled out (e.g. this is a README update) then just bail.
