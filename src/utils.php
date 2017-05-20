@@ -12,6 +12,13 @@ class Utils
     const SOMETHING_FIXED = 'abcdefg';
 
     /**
+     * Something else fixed.
+     *
+     * @const string
+     */
+    const SOMETHING_ELSE_FIXED = '01010101';
+
+    /**
      * Does something.
      *
      * @return string
