@@ -74,6 +74,6 @@ openssl aes-256-cbc -K $ENCRYPTED_KEY -iv $ENCRYPTED_IV -in "$CWD/.github/deploy
 echo "... Added ssh key."
 
 # Now that we're all set up, we can push.
-# git push --quiet $SSH_REPO $TARGET_BRANCH
+git push --quiet $SSH_REPO $TARGET_BRANCH
 
 echo "Published to GitHub Pages."
