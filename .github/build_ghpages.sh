@@ -25,7 +25,7 @@ SHA=`git rev-parse --verify HEAD`
 
 git clone --quiet $REPO $BUILD_DIR
 cd $BUILD_DIR
-git checkout --quiet $TARGET_BRANCH || git checkout --quiet --orphan $TARGET_BRANCH && cd "$BUILD_DIR" && git rm -rf .
+git checkout --quiet $TARGET_BRANCH || (git checkout --quiet --orphan $TARGET_BRANCH && cd "$BUILD_DIR" && git rm -rf .)
 
 echo "... Cloned repo/branch."
 
