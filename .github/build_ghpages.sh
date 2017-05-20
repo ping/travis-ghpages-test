@@ -29,7 +29,7 @@ git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
 
 # Clean out existing build
 cd "$CWD"
-rm -rf $BUILD_DIR/**/* || exit 0
+rm -rf $BUILD_DIR/* || exit 0
 mkdir -p $BUILD_DIR/docs
 
 # Grab latest phpDoc
@@ -43,7 +43,7 @@ cd $BUILD_DIR
 git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
 
-git add -A "docs/$TRAVIS_BRANCH"
+git add "docs/$TRAVIS_BRANCH"
 
 # If there are no changes to the compiled out (e.g. this is a README update) then just bail.
 if git diff --quiet --cached; then
