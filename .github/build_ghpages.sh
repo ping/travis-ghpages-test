@@ -52,7 +52,7 @@ fi
 
 # Grab latest apigen
 curl -sOL 'http://www.apigen.org/apigen.phar'
-php apigen.phar generate -s ./src -d $BUILD_DIR/apigen/$TRAVIS_BRANCH
+php apigen.phar generate -q -s ./src -d $BUILD_DIR/apigen/$TRAVIS_BRANCH
 
 echo "... Generated docs."
 
