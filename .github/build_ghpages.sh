@@ -84,4 +84,6 @@ echo "... Added ssh key."
 # Now that we're all set up, we can push.
 git push --quiet $SSH_REPO $TARGET_BRANCH
 
-echo "Published to GitHub Pages."
+REPO_USER=$(echo "$TRAVIS_REPO_SLUG" | grep -Eo '^([^/]+)')
+REPO_NAME=$(echo "$TRAVIS_REPO_SLUG" | grep -Eo '([^/]+)$')
+echo "Published to GitHub Pages https://$REPO_USER.github.io/$REPO_NAME/docs/$TRAVIS_BRANCH/"
