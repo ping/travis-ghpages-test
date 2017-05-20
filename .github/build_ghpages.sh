@@ -26,7 +26,6 @@ cd $BUILD_DIR
 
 cd "$CWD"
 
-# --------- PHPDOC ---------
 # Prep docs folders
 mkdir -p "$BUILD_DIR/docs"
 if [ -d "$BUILD_DIR/docs/$TRAVIS_BRANCH" ]; then
@@ -34,25 +33,21 @@ if [ -d "$BUILD_DIR/docs/$TRAVIS_BRANCH" ]; then
     rm -rf "$BUILD_DIR/docs/$TRAVIS_BRANCH"
 fi
 
-# Grab latest phpDoc
-curl -sOL 'https://phpdoc.org/phpDocumentor.phar'
+if [[ "$DOC_GENERATOR" == 'phpdoc' ]]; then
+    # --------- PHPDOC ---------
+    # Grab latest phpDoc
+    curl -sOL 'https://phpdoc.org/phpDocumentor.phar'
+    # Generate phpdoc output
+    php phpDocumentor.phar -q -n --template="responsive" --title="A TEST" --defaultpackagename="test" -d ./src -t $BUILD_DIR/docs/$TRAVIS_BRANCH
+    # Clear cache folders
+    rm -rf $BUILD_DIR/docs/$TRAVIS_BRANCH/phpdoc-cache-*
 
-# Generate phpdoc output
-php phpDocumentor.phar -q -n --template="responsive" --title="A TEST" --defaultpackagename="test" -d ./src -t $BUILD_DIR/docs/$TRAVIS_BRANCH
-# Clear cache folders
-rm -rf $BUILD_DIR/docs/$TRAVIS_BRANCH/phpdoc-cache-*
-
-# --------- APIGEN ---------
-# Prep apigen folders
-mkdir -p "$BUILD_DIR/apigen"
-if [ -d "$BUILD_DIR/apigen/$TRAVIS_BRANCH" ]; then
-    # remove last build
-    rm -rf "$BUILD_DIR/apigen/$TRAVIS_BRANCH"
+elif [[ condition ]]; then
+    # --------- APIGEN ---------
+    # Grab latest apigen
+    curl -sOL 'http://www.apigen.org/apigen.phar'
+    php apigen.phar generate -q -s ./src -d $BUILD_DIR/docs/$TRAVIS_BRANCH
 fi
-
-# Grab latest apigen
-curl -sOL 'http://www.apigen.org/apigen.phar'
-php apigen.phar generate -q -s ./src -d $BUILD_DIR/apigen/$TRAVIS_BRANCH
 
 echo "... Generated docs."
 
@@ -60,7 +55,7 @@ cd $BUILD_DIR
 git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
 
-git add -A "docs/$TRAVIS_BRANCH" "apigen/$TRAVIS_BRANCH"
+git add -A "docs/$TRAVIS_BRANCH"
 
 # If there are no changes to the compiled out (e.g. this is a README update) then just bail.
 if git diff --quiet --cached; then
