@@ -16,7 +16,7 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" -
     exit 0
 fi
 
-echo "Publishing to Github Pages...";
+echo "Publishing to Github Pages..."
 
 # Save some useful information
 REPO=`git config remote.origin.url`
@@ -26,6 +26,8 @@ SHA=`git rev-parse --verify HEAD`
 git clone --quiet $REPO $BUILD_DIR
 cd $BUILD_DIR
 git checkout --quiet $TARGET_BRANCH || git checkout --quiet --orphan $TARGET_BRANCH && cd "$BUILD_DIR" && git rm -rf .
+
+echo "... Cloned repo/branch."
 
 cd "$CWD"
 
@@ -38,10 +40,12 @@ fi
 
 # Grab latest phpDoc
 curl -sOL 'https://phpdoc.org/phpDocumentor.phar'
+
 # Generate phpdoc output
 php phpDocumentor.phar -q -n --template="responsive" --title="A TEST" --defaultpackagename="test" -d ./src -t $BUILD_DIR/docs/$TRAVIS_BRANCH
 # Clear cache folders
 rm -rf $BUILD_DIR/docs/$TRAVIS_BRANCH/phpdoc-cache-*
+echo "... Generated docs."
 
 cd $BUILD_DIR
 git config user.name "Travis CI"
@@ -59,6 +63,8 @@ fi
 # The delta will show diffs between new and old versions.
 git commit --quiet -m "Deploy to GitHub Pages: ${SHA} (Travis Build: $TRAVIS_BUILD_NUMBER)"
 
+echo "... Added changes."
+
 # Get the deploy key by using Travis's stored variables to decrypt deploy_key.enc
 ENCRYPTED_KEY_VAR="encrypted_${ENCRYPTION_LABEL}_key"
 ENCRYPTED_IV_VAR="encrypted_${ENCRYPTION_LABEL}_iv"
@@ -69,7 +75,9 @@ eval `ssh-agent -s`
 # Use stdin/stdout instead of key writing to disk
 openssl aes-256-cbc -K $ENCRYPTED_KEY -iv $ENCRYPTED_IV -in "$CWD/.github/deploy_key.enc" -d | ssh-add -
 
+echo "... Added ssh key."
+
 # Now that we're all set up, we can push.
-git push $SSH_REPO $TARGET_BRANCH
+git push --quiet $SSH_REPO $TARGET_BRANCH
 
 echo "Published to GitHub Pages."
