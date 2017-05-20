@@ -26,21 +26,21 @@ cd $BUILD_DIR
 
 cd "$CWD"
 
-# # --------- PHPDOC ---------
-# # Prep docs folders
-# mkdir -p "$BUILD_DIR/docs"
-# if [ -d "$BUILD_DIR/docs/$TRAVIS_BRANCH" ]; then
-#     # remove last build
-#     rm -rf "$BUILD_DIR/docs/$TRAVIS_BRANCH"
-# fi
+# --------- PHPDOC ---------
+# Prep docs folders
+mkdir -p "$BUILD_DIR/docs"
+if [ -d "$BUILD_DIR/docs/$TRAVIS_BRANCH" ]; then
+    # remove last build
+    rm -rf "$BUILD_DIR/docs/$TRAVIS_BRANCH"
+fi
 
-# # Grab latest phpDoc
-# curl -sOL 'https://phpdoc.org/phpDocumentor.phar'
+# Grab latest phpDoc
+curl -sOL 'https://phpdoc.org/phpDocumentor.phar'
 
-# # Generate phpdoc output
-# php phpDocumentor.phar -q -n --template="responsive" --title="A TEST" --defaultpackagename="test" -d ./src -t $BUILD_DIR/docs/$TRAVIS_BRANCH
-# # Clear cache folders
-# rm -rf $BUILD_DIR/docs/$TRAVIS_BRANCH/phpdoc-cache-*
+# Generate phpdoc output
+php phpDocumentor.phar -q -n --template="responsive" --title="A TEST" --defaultpackagename="test" -d ./src -t $BUILD_DIR/docs/$TRAVIS_BRANCH
+# Clear cache folders
+rm -rf $BUILD_DIR/docs/$TRAVIS_BRANCH/phpdoc-cache-*
 
 # --------- APIGEN ---------
 # Prep apigen folders
