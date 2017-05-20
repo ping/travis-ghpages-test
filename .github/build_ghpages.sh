@@ -46,11 +46,7 @@ elif [[ "$DOC_GENERATOR" == 'apigen' ]]; then
     # --------- APIGEN ---------
     # Grab latest apigen
     curl -sL -o 'apigen.phar' 'https://github.com/ApiGen/ApiGen/releases/download/v4.1.0/apigen-4.1.0.phar'
-    REPO_USER=$(echo "$TRAVIS_REPO_SLUG" | grep -Eo '^([^/]+)')
-    REPO_NAME=$(echo "$TRAVIS_REPO_SLUG" | grep -Eo '([^/]+)$')
-    echo $REPO_USER
-    echo $REPO_NAME
-    php apigen.phar generate -q --base-url="https://$REPO_USER.github.io/$REPO_NAME/docs/$TRAVIS_BRANCH/" -s ./src -d $BUILD_DIR/docs/$TRAVIS_BRANCH
+    php apigen.phar generate -q -s ./src -d $BUILD_DIR/docs/$TRAVIS_BRANCH
 fi
 
 echo "... Generated docs."
