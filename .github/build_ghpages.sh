@@ -41,6 +41,17 @@ php phpDocumentor.phar -q -n --template="responsive" --title="A TEST" --defaultp
 # Clear cache folders
 rm -rf $BUILD_DIR/docs/$TRAVIS_BRANCH/phpdoc-cache-*
 
+# Prep apigen folders
+mkdir -p "$BUILD_DIR/apigen"
+if [ -d "$BUILD_DIR/apigen/$TRAVIS_BRANCH" ]; then
+    # remove last build
+    rm -rf "$BUILD_DIR/apigen/$TRAVIS_BRANCH"
+fi
+
+# Grab latest apigen
+curl -sOL 'http://www.apigen.org/apigen.phar'
+php apigen.phar generate -s ./src -d $BUILD_DIR/apigen/$TRAVIS_BRANCH
+
 echo "... Generated docs."
 
 cd $BUILD_DIR
@@ -48,6 +59,7 @@ git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
 
 git add -A "docs/$TRAVIS_BRANCH"
+git add -A "apigen/$TRAVIS_BRANCH"
 
 # If there are no changes to the compiled out (e.g. this is a README update) then just bail.
 if git diff --quiet --cached; then

@@ -9,6 +9,7 @@ env:
   global:
     - ENCRYPTION_LABEL="052ccc0f979b"
     - COMMIT_AUTHOR_EMAIL="ping@users.noreply.github.com"
+
 script:
   - find {src,examples} -name '*.php' -print0 | xargs -0 -n1 -P8 php -l | grep -v '^No syntax errors detected'; test $? -eq 1
 
