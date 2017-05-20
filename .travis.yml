@@ -1,0 +1,25 @@
+language: php
+
+php:
+- '5.6'
+- '7.0'
+- '7.1'
+
+env:
+  global:
+    - ENCRYPTION_LABEL: "052ccc0f979b"
+    - COMMIT_AUTHOR_EMAIL: "ping@users.noreply.github.com"
+
+before_install:
+  - if [ "$TRAVIS_PULL_REQUEST" == 'false' ] && [ "$TRAVIS_BRANCH" == 'master' ]; then sudo apt-get install graphviz; fi
+
+script:
+  - find {src,examples} -name '*.php' -print0 | xargs -0 -n1 -P8 php -l | grep -v '^No syntax errors detected'; test $? -eq 1
+
+after_success:
+  - chmod +x .github/build_ghpages.sh
+  - bash .github/build_ghpages.sh
+
+branches:
+  only:
+    - master
