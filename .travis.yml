@@ -17,8 +17,7 @@ script:
   - find {src,examples} -name '*.php' -print0 | xargs -0 -n1 -P8 php -l | grep -v '^No syntax errors detected'; test $? -eq 1
 
 after_success:
-  - chmod +x .github/build_ghpages.sh
-  - bash .github/build_ghpages.sh
+  - chmod +x .github/build_ghpages.sh && bash .github/build_ghpages.sh
 
 branches:
   only:
