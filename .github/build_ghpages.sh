@@ -42,7 +42,7 @@ if [[ "$DOC_GENERATOR" == 'phpdoc' ]]; then
     # Clear cache folders
     rm -rf $BUILD_DIR/docs/$TRAVIS_BRANCH/phpdoc-cache-*
 
-elif [[ condition ]]; then
+elif [[ "$DOC_GENERATOR" == 'apigen' ]]; then
     # --------- APIGEN ---------
     # Grab latest apigen
     curl -sOL 'http://www.apigen.org/apigen.phar'
