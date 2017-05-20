@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project title="A TEST" version="v2.9.0">
   <partials/>
+  <file path="utils.php" generated-path="utils.html" hash="0de07952663040df8792e15aac73c405" package="test">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="test"/>
+    </docblock>
+    <class final="false" abstract="false" namespace="TestMe" line="5" package="test">
+      <extends/>
+      <name>Utils</name>
+      <full_name>\TestMe\Utils</full_name>
+      <docblock line="5">
+        <description></description>
+        <long-description></long-description>
+        <tag name="package" line="5" description="test"/>
+      </docblock>
+      <constant namespace="TestMe" line="12" package="test">
+        <name>SOMETHING_FIXED</name>
+        <full_name>\TestMe\Utils::SOMETHING_FIXED</full_name>
+        <value>'abcdefg'</value>
+        <docblock line="12">
+          <description>Something fixed.</description>
+          <long-description></long-description>
+          <tag name="const" line="12" description="string"/>
+        </docblock>
+      </constant>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="TestMe" line="19" package="test">
+        <name>doSomething</name>
+        <full_name>\TestMe\Utils::doSomething()</full_name>
+        <docblock line="19">
+          <description>Does something.</description>
+          <long-description></long-description>
+          <tag name="return" line="19" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="5" code="PPC:ERR-50005">No summary for class \TestMe\Utils</error>
+    </parse_markers>
+    <source>eJxtjz8PgjAQxfd+ittUBtlBo4N/B3UQEzdTyiFNSku4kpgYvru1gIN6y0vuvdzv3WxRFRVjmpdIFRcICZI9YMyYUJwILlYqYk8GbsIg8AoBnE2JtpD6Drl8YDbt94O9FEaTBbK1i/TL0GtnnE+HdbLbH7e3zf66XsEcRjwVGeb3kSN/sVYGCWgA/qBqtE2t/7GqJlVSOIdbJ3mjhZVGQ2Y+7ccTH+zee89wDFUeRV8tY59qWfsCRtZTiA==</source>
+  </file>
   <file path="credits.php" generated-path="credits.html" hash="c56ab0253a52155c706f8a386936760e" package="test">
     <docblock line="0">
       <description></description>
@@ -25,5 +68,6 @@
   </file>
   <package name="global" full_name="global"/>
   <package name="test" full_name="test"/>
+  <namespace name="TestMe" full_name="TestMe"/>
   <deprecated count="0"/>
 </project>
