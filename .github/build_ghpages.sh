@@ -21,8 +21,8 @@ git clone --quiet $REPO $BUILD_DIR
 
 cd $BUILD_DIR
 
-(git checkout --quiet $TARGET_BRANCH && echo "... Cloned existing $TARGET_BRANCH.") \
-|| (git checkout --quiet --orphan $TARGET_BRANCH && echo "... Cloned new $TARGET_BRANCH." && cd "$BUILD_DIR" && git rm -qrf .)
+(git checkout --quiet $TARGET_BRANCH && echo "... Existing $TARGET_BRANCH branch.") \
+|| (git checkout --quiet --orphan $TARGET_BRANCH && echo "... New $TARGET_BRANCH branch." && cd "$BUILD_DIR" && git rm -qrf .)
 
 cd "$CWD"
 
