@@ -1,6 +1,6 @@
 <?php
 
-namespace TestMe
+namespace TestMe;
 
 class Utils
 {
@@ -9,7 +9,7 @@ class Utils
      *
      * @const string
      */
-    const SOMETHING_FIXED = 'abcdefg'
+    const SOMETHING_FIXED = 'abcdefg';
 
     /**
      * Does something.
