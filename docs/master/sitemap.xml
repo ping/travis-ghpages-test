@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+	<loc>https://ping.github.io/travis-ghpages-test/docs/master/index.html</loc>
+</url>
+<url>
+	<loc>https://ping.github.io/travis-ghpages-test/docs/master/namespace-TestMe.html</loc>
+</url>
+
+
+<url>
+	<loc>https://ping.github.io/travis-ghpages-test/docs/master/class-TestMe.Utils.html</loc>
+</url>
+</urlset>
